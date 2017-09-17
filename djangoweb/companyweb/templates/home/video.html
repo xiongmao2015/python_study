@@ -1,0 +1,72 @@
+{% extends 'home/base.html' %}
+{% load mytags %}
+{% block css %}
+    <style type="text/css">
+        a{  font-size:20px;
+            display:inline-block;
+            padding:10px;
+
+        }
+    .active{
+        background-color: blue;
+        color:white;
+    }
+
+    .video_div{
+        width:300px;
+        height: 300px;
+        display: inline-block;
+        text-align: center;
+
+    }
+    </style>
+
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="bg-gray ptb20">
+        <div class="wrap">
+             <div>
+{#             索引为2的情况下，在路径中的索引为2#}
+                {%action_all request.path 2 %}
+            {% for item in direaction_list %}
+                {% action request.path item 2%}
+{#                引入mytags后，调用action1标签，生成a标签#}
+{#                <a>{{ direaction.name }}</a>#}
+            {% endfor %}
+            </div>
+
+
+
+             <div>
+                {% action_all request.path 3 %}
+            {% for item in cls_list %}
+                {% action request.path item 3%}
+            {% endfor %}
+            </div>
+
+
+        <div class="wrap">
+                 <div>
+                    {% action_all request.path 4 %}
+                {% for item in level_list %}
+{#                    注意这边的level本身是个属性，他是个元祖，通过索引获取值。修改level的格式就能编程其他的#}
+{#                    请求的是路径名和item.请求路径名为request.path。#}
+                    {% action  request.path item 4%}
+{#                    <a>{{ item.name }}</a>#}
+                {% endfor %}
+                </div>
+        <div class="video_body">
+            {% for video in video_list %}
+                <div class="video_div">
+                    <img src="{{ video.img.url }}" alt="" title="" style="height: 250px;width: 250px">
+                    <p style="font-size: 20px;">{{ video.title}}</p>
+                </div>
+            {% endfor %}
+        </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

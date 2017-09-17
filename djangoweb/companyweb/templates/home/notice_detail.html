@@ -1,0 +1,30 @@
+{% extends 'home/base.html' %}
+{% block css %}
+<style type="text/css">
+    .notice_action{
+        width:50%;
+        height: auto;
+        position: relative;
+        right: -25%;
+{#        text-align: center;#}
+    }
+    .notice_title{
+        font-size: 20px;
+        text-indent: 2em;
+        line-height: 40px;
+        font-family: sans-serif;
+    }
+    .title{
+        font-size:50px;
+        text-align:center;
+        line-height: 3em;
+    }
+</style>
+
+{% endblock %}
+{% block body %}
+    <div class="notice_action">
+    <h1 class="notice_title title">{{ notice.title }}</h1>
+    <p class="notice_title">{{ notice.content }}</p>
+    </div>
+{% endblock %}

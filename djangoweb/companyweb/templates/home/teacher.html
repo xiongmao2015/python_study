@@ -1,0 +1,38 @@
+{% extends 'home/base.html' %}
+{% load staticfiles %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/teacher.css'%} ">
+{% endblock %}
+{% block body %}
+<div class="bg-gray">
+        <div class="wrap">
+
+            <div class="headline-center margin-bottom-20">
+                <!--<h2>师资团队</h2>-->
+                <img class="title-picture testimonials-v6 testimonials-wrap" src="/static/images/选美.png">
+            </div>
+            <div class="testimonials-v6 testimonials-wrap">
+                {% for teacher in teacher_list %}
+                <div class="row pb20">
+                    <div class="col-md-12">
+                        <div class="testimonials-info rounded-bottom">
+                            <img class="rounded-x" src="{{ teacher.teaimg.url }}" alt="" title="{{ teacher.name }}">
+                            <div class="testimonials-desc">
+                                <strong>{{ teacher.name }}</strong>
+                                <p>{{ teacher.name }}</p>
+                                <a target="_blank" href="http://weibo.com"><i class="fa fa-weibo"></i> 微博</a>
+                                <a target="_blank" href="http://www.baidu.com"><i class="fa fa-file-text-o"></i> 博客</a>
+                                <a target="_blank" href="http://www.tudou.com"><i class="fa fa-video-camera"></i> 视频</a>
+                                <hr class="hr-xs">
+                                <span>{{ teacher.description }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+</div>
+{% endblock %}
