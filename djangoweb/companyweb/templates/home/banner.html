@@ -1,0 +1,16 @@
+
+
+    <div>
+        <div style="height: 600px;background: #c0c0c0;">
+        <!--应对响应式布局不好-->
+            <ul id="bxslider" class="bxslider" >
+                {% for banner in banner_list %}
+                <li>
+                    <a href="{{ banner.href }}">
+                        <img style="height: 600px; width: 50%;position:relative;right: -25%;" src="{{ banner.img.url}}">
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>

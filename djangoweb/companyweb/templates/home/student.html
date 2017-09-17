@@ -1,0 +1,95 @@
+{% extends 'home/base.html' %}
+{% load staticfiles %}
+{% load myfilters %}
+{#注意导入css.#}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/student.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+{% endblock %}
+{% block body %}
+    <div class="bg-gray ptb20">
+        <div class="wrap">
+
+            <div class="headline-center margin-bottom-60">
+                <h2>关于KAMI教育</h2>
+                <p>用责任和情怀专注IT教育30年<br>
+                    自8月2日上线以来，由优酷、奥飞剧业、雄孩子传媒、有妖气联合出品的《镇魂街》凭借逼真的特效场景搭建、《镇魂街》已累计8亿的网络播放量，</p>
+            </div>
+
+            <div class="blog_masonry_3col">
+                <div class="container content grid-boxes masonry clearfix"
+                     style="position: relative;padding-top: 0;padding-bottom: 0;">
+                    <div class="column-flow"><!--第一列-->
+
+                        {% for student in student_list %}
+                            {% if forloop.counter|flow:'3,1'%}
+{#                                # 管道符不能有空格,3,1是传入的值arg.,forloop.counter的索引是从1开始#}
+                        <div class="grid-boxes-in masonry-brick">
+                            <img class="img-responsive" style="height: 300px;width: 320px;"
+                                 src="{{ student.student.avatar.url }}" alt="">
+                            <div class="grid-boxes-caption">
+                                <h3><a href="#">{{ student.student.name }}</a></h3>
+                                <ul class="list-inline grid-boxes-news">
+                                    <li><span>学校：</span> <a href="#">{{ student.student.company }}</a></li>
+                                    <li><span>票数：</span>{{ student.student.salary }}票</li>
+                                </ul>
+                                <p>
+                                    {{ student.letter}}</p>
+                            </div>
+                        </div>
+                            {% endif %}
+                        {% endfor  %}
+
+                    </div>
+                     <div class="column-flow"><!--第二列-->
+
+                        {% for student in student_list %}
+                            {% if forloop.counter|flow:'3,2'%}
+{#                                # 管道符不能有空格,3,1是传入的值arg.,forloop.counter的索引是从1开始#}
+                        <div class="grid-boxes-in masonry-brick">
+                            <img class="img-responsive" style="height: 300px;width: 320px;"
+                                 src="{{ student.student.avatar.url }}" alt="">
+                            <div class="grid-boxes-caption">
+                                <h3><a href="#">{{ student.student.name }}</a></h3>
+                                <ul class="list-inline grid-boxes-news">
+                                    <li><span>学校：</span> <a href="#">{{ student.student.company }}</a></li>
+                                    <li><span>票数：</span>{{ student.student.salary }}票</li>
+                                </ul>
+                                <p>
+                                    {{ student.letter}}</p>
+                            </div>
+                        </div>
+                            {% endif %}
+                        {% endfor  %}
+
+
+                </div>
+
+                     <div class="column-flow"><!--第二列-->
+
+                        {% for student in student_list %}
+                            {% if forloop.counter|flow:'3,0'%}
+{#                                # 管道符不能有空格,3,1是传入的值arg.,forloop.counter的索引是从1开始#}
+                        <div class="grid-boxes-in masonry-brick">
+                            <img class="img-responsive" style="height: 300px;width: 320px;"
+                                 src="{{ student.student.avatar.url }}" alt="">
+                            <div class="grid-boxes-caption">
+                                <h3><a href="#">{{ student.student.name }}</a></h3>
+                                <ul class="list-inline grid-boxes-news">
+                                    <li><span>学校：</span> <a href="#">{{ student.student.company }}</a></li>
+                                    <li><span>票数：</span>{{ student.student.salary }}票</li>
+                                </ul>
+                                <p>
+                                    {{ student.letter}}</p>
+                            </div>
+                        </div>
+                            {% endif %}
+                        {% endfor  %}
+
+
+                </div>
+                </div><!--/container-->
+            </div>
+        </div>
+    </div>
+{% endblock %}
