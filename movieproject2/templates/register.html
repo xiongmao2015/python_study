@@ -1,0 +1,40 @@
+﻿{% extends "base.html" %}
+{% block title %}
+<title>注册</title>
+{% endblock %}
+{% block contend_head %}
+<h1>超人影院注册</h1>
+{% endblock %}
+{% block form %}
+            <p class="checkname"></p>
+			<form class="form" action="{% url "register" %}" method="post" onsubmit="check()">{% csrf_token %}
+                <input type="text" placeholder="昵称" id="username" name="username">
+				<input type="password" placeholder="密码" id="password1" name="password1">
+                <input type="password" placeholder="确认密码" id="password2" name="password2">
+				<button type="submit" id="login-button" onclick=check()>注册</button>
+
+			</form>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" charset="UTF-8">
+    $(function () {
+        $('#username').blur(function(){
+            var username=$(this).val();
+            console.log(username);
+            $.get('{% url "checkname" %}',{username:username},function(data) {
+                if (data =='ok') {
+                    $('.checkname').text("昵称可以注册").css('color', 'blue');
+
+                }
+                else if(data=="none"){
+                    $('.checkname').text("昵称不能为空").css('color', 'yellow');
+                }
+                else {
+                    $('.checkname').text("昵称已经被注册，请重新输入").css('color', 'red')
+                }
+            })
+        })
+    })
+    </script>
+{% endblock %}

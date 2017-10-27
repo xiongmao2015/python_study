@@ -1,0 +1,16 @@
+﻿{% extends "base.html" %}
+{% block title %}
+<title>登录</title>
+{% endblock %}
+{% block contend_head %}
+<h1>超人影院</h1>
+{% endblock %}
+{% block form %}
+			<form class="form" action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+				<input type="text" placeholder="昵称" name="username">
+				<input type="password" placeholder="密码" name="password">
+				<button type="submit" id="login-button">登录</button>
+				<P>还没有账号，赶紧<a href="{% url "register" %}">注册</a></p>
+			</form>
+{% endblock %}

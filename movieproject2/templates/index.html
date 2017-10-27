@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>电影页</title>
+
+    <style type="text/css">
+        .content_movie{
+            margin-left:2.5%;
+            border-radius: 15px;
+            width:95%;
+            height:100px;
+            background-color: lightgreen;
+
+        }
+        .mylike{
+            text-align: center;
+            line-height: 30px;
+            width:60px;
+            height:30px;
+            position:relative;
+            border-radius: 10px;
+            color:white;
+            right:15px;
+            float:right;
+            background-color: forestgreen;
+        }
+        .mylikered{
+            text-align: center;
+            line-height: 30px;
+            width:60px;
+            height:30px;
+            position:relative;
+            border-radius: 10px;
+            color:white;
+            right:15px;
+            float:right;
+            background-color: red;
+        }
+        h2{
+            text-align: center;
+        }
+        img{
+            position:relative;
+            left:15px;
+            top:5px;
+            float:left;
+
+            width:90px;
+            height: 90px;
+        }
+
+        .content_title{
+            position:relative;
+            top: 35%;
+            left:20%;
+        }
+        a{
+            text-decoration: none;
+            color:black;
+        }
+        .content_id{
+            position: relative;
+            top: 30%;
+            left:-10%;
+            display: none;
+        }
+        .movie{
+            display:inline-block;
+            position:fixed;
+            bottom:0;
+            left:0;
+            text-align: center;
+            width:50%;
+            height: 50px;
+            background-color: lightgrey;
+{#            float:left;#}
+            line-height: 50px;
+        }
+        .myinfo{
+            display:inline-block;
+            position:fixed;
+            bottom:0;
+            right:0;
+            width:50%;
+            height: 50px;
+            background-color: lightgrey;
+            float:right;
+            text-align: center;
+            line-height: 50px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="content">
+<div class="content_head">
+    <h2>超人影院</h2>
+    {% for movie in movies %}
+    <div class="content_movie" >
+
+    <img src="{{ movie.image }}">
+
+    <p class="content_title" title="{{  movie.title }}"><a href="http://app.vmoiver.com/{{movie.postid}}?qingapp=app_new">{{ movie.title |slice:'6'}}...</a></P>
+        {% if movie in userlist %}
+            <div class="mylikered"  id="{{ movie.postid }}">收藏</div>
+            {% else %}
+            <div class="mylike"  id="{{ movie.postid }}">收藏</div>
+        {%endif%}
+    <p class="content_id">{{ movie.postid }}</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+</div>
+<div class="content_foot">
+    <div class="movie"><a href="{% url 'indexpage' %}">电影</a></div>
+    <div class="myinfo"><a href="{% url 'main' %}">我的</a></div>
+</div>
+<script src="{% static "js/jquery.min.js" %}" type="text/javascript"></script>
+<script type="text/javascript" charset="utf8">
+    $(function(){
+        $('.mylike').click(function(){
+            var movieid=$(this).next().text();
+            $.post('{% url 'mylike'%}',{movieid:movieid},function(result){
+                //get传递会有些影响。改为post
+//注意这边的resuelt是只能接受数据的，不能接受转化过来的网址。
+                console.log(result);
+                if(result === "ok"){
+                    console.log(movieid);
+                    $('#'+ movieid).attr("class","mylikered");
+{#                    $(this).css({"background-color":"red"})#}
+                }
+                else{
+                    window.location.href= "{% url 'login' %}";
+                }
+            })
+        })
+    })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>个人主页</title>
+    <style type="text/css">
+        .content_username{
+            height: 200px;
+            background-color: lightgreen;
+
+        }
+        .username{
+            position:relative;
+            font-size:20px;
+            top: 25%;
+            left:25%;
+            width:50%;
+            height:100px;
+            background-color:lightgoldenrodyellow;
+            text-align: center;
+            line-height: 100px;
+
+        }
+        .content_movie{
+            font-size: 20px;
+            height: 50px;
+            background-color: lightgrey;
+            margin: 0;
+            line-height: 50px;
+        }
+         .movie{
+            display:inline-block;
+            position:fixed;
+            bottom:0;
+            left:0;
+            text-align: center;
+            width:50%;
+            height: 50px;
+            background-color: lightgrey;
+{#            float:left;#}
+            line-height: 50px;
+        }
+        .myinfo{
+            display:inline-block;
+            position:fixed;
+            bottom:0;
+            right:0;
+            width:50%;
+            height: 50px;
+            background-color: lightgrey;
+            float:right;
+            text-align: center;
+            line-height: 50px;
+        }
+        .kongbai{
+            height:200px;
+            background-color: white;
+        }
+        a{
+            text-decoration: none;
+            color:black;
+        }
+    </style>
+</head>
+<body>
+<div class="content_username">
+
+    <div class="username">
+        <img src="">{{ username }}<a class="user_logout" href="{% url 'logout' %}">&nbsp;&nbsp;注销</a></div>
+
+</div>
+<div class="content_movie">
+    <a href="{% url 'like' %}">我的收藏</a>
+</div>
+<div class="kongbai">
+
+</div>
+
+<div class="content_foot">
+    <div class="movie"><a href="{% url 'indexpage' %}">电影</a></div>
+    <div class="myinfo"><a href="">我的</a></div>
+</div>
+</body>
+</html>

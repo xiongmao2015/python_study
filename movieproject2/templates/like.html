@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>电影页</title>
+
+    <style type="text/css">
+        .content_movie{
+            margin-left:2.5%;
+            border-radius: 15px;
+            width:95%;
+            height:100px;
+            background-color: lightgreen;
+
+        }
+        .mylike{
+            text-align: center;
+            line-height: 30px;
+            width:60px;
+            height:30px;
+            position:relative;
+            border-radius: 10px;
+            color:white;
+            right:15px;
+            float:right;
+            background-color: forestgreen;
+        }
+        h2{
+            text-align: center;
+        }
+        img{
+            position:relative;
+            left:15px;
+            top:5px;
+            float:left;
+
+            width:90px;
+            height: 90px;
+        }
+
+        .content_title{
+            position:relative;
+            top: 35%;
+            left:20%;
+        }
+        a{
+            text-decoration: none;
+            color:black;
+        }
+        .content_id{
+            position: relative;
+            top: 30%;
+            left:-10%;
+            display: none;
+        }
+        .movie{
+            display:inline-block;
+            position:fixed;
+            bottom:0;
+            left:0;
+            text-align: center;
+            width:50%;
+            height: 50px;
+            background-color: lightgrey;
+{#            float:left;#}
+            line-height: 50px;
+        }
+        .myinfo{
+            display:inline-block;
+            position:fixed;
+            bottom:0;
+            right:0;
+            width:50%;
+            height: 50px;
+            background-color: lightgrey;
+            float:right;
+            text-align: center;
+            line-height: 50px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="content">
+<div class="content_head">
+    <h2>我的收藏</h2>
+    {% for movie in movies %}
+    <div class="content_movie" id="{{ movie.postid }}" >
+
+    <img src="{{ movie.image }}">
+    <p class="content_title" title="{{  movie.title }}"><a href="http://app.vmoiver.com/{{movie.postid}}?qingapp=app_new">{{ movie.title |slice:'6'}}...</a></P>
+    <div class="mylike">删除</div>
+    <p class="content_id">{{ movie.postid }}</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+</div>
+<div class="content_foot">
+    <div class="movie"><a href="{% url 'indexpage' %}">电影</a></div>
+    <div class="myinfo"><a href="{% url 'main' %}">我的</a></div>
+</div>
+<script src="{% static "js/jquery-2.1.1.min.js" %}" type="text/javascript"></script>
+<script type="text/javascript" charset="utf8">
+    $(function(){
+        $('.mylike').click(function(){
+            var movieid=$(this).next().text();
+{#            注意：获取有三种方式，val是获取表单的，text是获取值得，html是获取标签。#}
+{#            console.log(movieid);#}
+{#            $(this).parent().remove();#}
+            $.get('{% url 'dellike'%}',{movieid:movieid},function(data){
+                console.log(data);
+                console.log(typeof(data));
+                if(data === "ok"){
+                    $('#'+movieid).remove();
+                     console.log("ok")
+                }
+            });
+
+        })
+    })
+    </script>
+
+</body>
+</html>
